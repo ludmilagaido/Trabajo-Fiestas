@@ -1,0 +1,112 @@
+import React from "react";
+
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+} from "react-native";
+
+const opciones = [
+  {
+    id: "1",
+    titulo: "🎉 Fiestas",
+    descripcion: "Descubrí diferentes tipos de fiestas.",
+  },
+  {
+    id: "2",
+    titulo: "🎧 Música",
+    descripcion: "Encontrá música para cada evento.",
+  },
+  {
+    id: "3",
+    titulo: "👗 Outfits",
+    descripcion: "Ideas para elegir qué ponerte.",
+  },
+  {
+    id: "4",
+    titulo: "💡 Ideas",
+    descripcion: "Ideas para hacer tu fiesta más divertida.",
+  },
+  {
+    id: "5",
+    titulo: "📸 Fotos",
+    descripcion: "Consejos para sacar buenas fotos.",
+  },
+];
+
+export default function InicioScreen() {
+  function renderItem({ item }) {
+    return (
+      <View style={styles.card}>
+        <Text style={styles.title}>{item.titulo}</Text>
+
+        <Text style={styles.description}>
+          {item.descripcion}
+        </Text>
+      </View>
+    );
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.logo}>
+        🎵 PARTY GUIDE
+      </Text>
+
+      <Text style={styles.subtitle}>
+        Todo lo que necesitás para tu próxima fiesta.
+      </Text>
+
+      <FlatList
+        data={opciones}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+        contentContainerStyle={styles.list}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#F8F8F8",
+    padding: 20,
+  },
+
+  logo: {
+    fontSize: 28,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop: 20,
+  },
+
+  subtitle: {
+    textAlign: "center",
+    fontSize: 16,
+    marginTop: 10,
+    marginBottom: 15,
+  },
+
+  list: {
+    paddingBottom: 20,
+  },
+
+  card: {
+    backgroundColor: "#FFFFFF",
+    padding: 20,
+    marginBottom: 12,
+    borderRadius: 12,
+  },
+
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 6,
+  },
+
+  description: {
+    fontSize: 15,
+  },
+});
