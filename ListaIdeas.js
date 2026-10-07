@@ -4,7 +4,7 @@ import {
   View,
   Text,
   FlatList,
-  TouchableOpacity,
+  Pressable,
   StyleSheet,
 } from "react-native";
 
@@ -15,9 +15,13 @@ export default function ListaIdeas({ navigation }) {
 
   function renderItem({ item, index }) {
     return (
-      <TouchableOpacity
-        activeOpacity={0.88}
-        style={styles.card}
+      <Pressable
+        style={({ pressed }) => [
+          styles.card,
+          pressed && {
+            opacity: 0.88,
+          },
+        ]}
         onPress={() =>
           navigation.navigate("DetalleIdea", {
             idea: item,
@@ -47,7 +51,7 @@ export default function ListaIdeas({ navigation }) {
             →
           </Text>
         </View>
-      </TouchableOpacity>
+      </Pressable>
     );
   }
 
