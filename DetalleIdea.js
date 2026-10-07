@@ -1,7 +1,6 @@
 import React from "react";
 
 import {
-  ScrollView,
   View,
   Text,
   StyleSheet,
@@ -11,11 +10,7 @@ export default function DetalleIdea({ route }) {
   const { idea } = route.params;
 
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.content}
-      showsVerticalScrollIndicator={false}
-    >
+    <View style={styles.container}>
       <View style={styles.hero}>
         <View style={styles.iconCircle}>
           <Text style={styles.emoji}>
@@ -47,7 +42,7 @@ export default function DetalleIdea({ route }) {
           experiencia diferente.
         </Text>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
