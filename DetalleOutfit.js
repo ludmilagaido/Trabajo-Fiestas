@@ -4,7 +4,6 @@ import {
   Animated,
   Image,
   Pressable,
-  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -65,14 +64,86 @@ export default function DetalleOutfit({ route, navigation }) {
   const image =
     fotosOutfits[imageIndex];
 
-  return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.content}
-      showsVerticalScrollIndicator={false}
-    >
-      {/* HERO */}
+  const prendas = [];
 
+  outfit.prendas?.forEach(
+    (prenda, index) => {
+      prendas.push(
+        <Animated.View
+          key={index}
+          style={[
+            styles.item,
+            {
+              opacity,
+              transform: [
+                {
+                  translateX:
+                    translateY.interpolate({
+                      inputRange: [0, 25],
+                      outputRange: [0, 20],
+                    }),
+                },
+              ],
+            },
+          ]}
+        >
+          <View style={styles.number}>
+            <Text style={styles.numberText}>
+              {String(index + 1).padStart(
+                2,
+                "0"
+              )}
+            </Text>
+          </View>
+
+          <Text style={styles.itemText}>
+            {prenda}
+          </Text>
+
+          <View style={styles.check}>
+            <Ionicons
+              name="sparkles"
+              size={15}
+              color="#FF3D81"
+            />
+          </View>
+        </Animated.View>
+      );
+    }
+  );
+
+  const colores = [];
+
+  outfit.colores?.forEach(
+    (color, index) => {
+      colores.push(
+        <View
+          key={index}
+          style={styles.color}
+        >
+          <View
+            style={[
+              styles.colorDot,
+              {
+                backgroundColor:
+                  getColor(
+                    color,
+                    index
+                  ),
+              },
+            ]}
+          />
+
+          <Text style={styles.colorText}>
+            {color}
+          </Text>
+        </View>
+      );
+    }
+  );
+
+  return (
+    <View style={styles.container}>
       <Animated.View
         style={[
           styles.hero,
@@ -131,8 +202,6 @@ export default function DetalleOutfit({ route, navigation }) {
         </View>
       </Animated.View>
 
-      {/* PRENDAS */}
-
       <Animated.View
         style={[
           styles.section,
@@ -164,52 +233,8 @@ export default function DetalleOutfit({ route, navigation }) {
           </View>
         </View>
 
-        {outfit.prendas?.map(
-          (prenda, index) => (
-            <Animated.View
-              key={index}
-              style={[
-                styles.item,
-                {
-                  opacity,
-                  transform: [
-                    {
-                      translateX:
-                        translateY.interpolate({
-                          inputRange: [0, 25],
-                          outputRange: [0, 20],
-                        }),
-                    },
-                  ],
-                },
-              ]}
-            >
-              <View style={styles.number}>
-                <Text style={styles.numberText}>
-                  {String(index + 1).padStart(
-                    2,
-                    "0"
-                  )}
-                </Text>
-              </View>
-
-              <Text style={styles.itemText}>
-                {prenda}
-              </Text>
-
-              <View style={styles.check}>
-                <Ionicons
-                  name="sparkles"
-                  size={15}
-                  color="#FF3D81"
-                />
-              </View>
-            </Animated.View>
-          )
-        )}
+        {prendas}
       </Animated.View>
-
-      {/* COLORES */}
 
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
@@ -233,35 +258,9 @@ export default function DetalleOutfit({ route, navigation }) {
         </View>
 
         <View style={styles.colors}>
-          {outfit.colores?.map(
-            (color, index) => (
-              <View
-                key={index}
-                style={styles.color}
-              >
-                <View
-                  style={[
-                    styles.colorDot,
-                    {
-                      backgroundColor:
-                        getColor(
-                          color,
-                          index
-                        ),
-                    },
-                  ]}
-                />
-
-                <Text style={styles.colorText}>
-                  {color}
-                </Text>
-              </View>
-            )
-          )}
+          {colores}
         </View>
       </View>
-
-      {/* TIP */}
 
       <View style={styles.tip}>
         <View style={styles.tipIcon}>
@@ -284,8 +283,6 @@ export default function DetalleOutfit({ route, navigation }) {
         </View>
       </View>
 
-      {/* BOTÓN */}
-
       <Pressable
         style={({ pressed }) => [
           styles.backButton,
@@ -307,7 +304,7 @@ export default function DetalleOutfit({ route, navigation }) {
       </Pressable>
 
       <View style={styles.bottomSpace} />
-    </ScrollView>
+    </View>
   );
 }
 
@@ -390,8 +387,6 @@ const styles = StyleSheet.create({
   content: {
     paddingBottom: 30,
   },
-
-  /* HERO */
 
   hero: {
     height: 430,
@@ -486,8 +481,6 @@ const styles = StyleSheet.create({
     marginTop: 9,
   },
 
-  /* SECTIONS */
-
   section: {
     marginHorizontal: 16,
     marginTop: 10,
@@ -524,8 +517,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-
-  /* ITEMS */
 
   item: {
     flexDirection: "row",
@@ -579,8 +570,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  /* COLORS */
-
   colors: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -617,8 +606,6 @@ const styles = StyleSheet.create({
     fontFamily: "SpaceGrotesk_500Medium",
     fontSize: 11,
   },
-
-  /* TIP */
 
   tip: {
     marginHorizontal: 16,
@@ -669,8 +656,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 18,
   },
-
-  /* BACK */
 
   backButton: {
     marginHorizontal: 16,
