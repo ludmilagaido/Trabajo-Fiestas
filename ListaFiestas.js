@@ -4,7 +4,7 @@ import {
   View,
   Text,
   FlatList,
-  TouchableOpacity,
+  Pressable,
   StyleSheet,
 } from "react-native";
 
@@ -15,9 +15,13 @@ export default function ListaFiestas({ navigation }) {
     const emojis = ["🌈", "💗", "🖤", "🔥"];
 
     return (
-      <TouchableOpacity
-        activeOpacity={0.88}
-        style={styles.card}
+      <Pressable
+        style={({ pressed }) => [
+          styles.card,
+          pressed && {
+            opacity: 0.88,
+          },
+        ]}
         onPress={() =>
           navigation.navigate("DetalleFiesta", {
             fiesta: item,
@@ -81,7 +85,7 @@ export default function ListaFiestas({ navigation }) {
             →
           </Text>
         </View>
-      </TouchableOpacity>
+      </Pressable>
     );
   }
 
