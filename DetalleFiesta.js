@@ -4,18 +4,13 @@ import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
 } from "react-native";
 
 export default function DetalleFiesta({ route }) {
   const { fiesta } = route.params;
 
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.content}
-      showsVerticalScrollIndicator={false}
-    >
+    <View style={styles.container}>
       <View style={styles.hero}>
         <View style={styles.heroIcon}>
           <Text style={styles.heroEmoji}>
@@ -117,7 +112,7 @@ export default function DetalleFiesta({ route }) {
           empieza ahora.
         </Text>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
