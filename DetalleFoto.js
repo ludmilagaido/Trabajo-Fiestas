@@ -1,7 +1,6 @@
 import React from "react";
 
 import {
-  ScrollView,
   View,
   Text,
   StyleSheet,
@@ -11,11 +10,7 @@ export default function DetalleFoto({ route }) {
   const { foto } = route.params;
 
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.content}
-      showsVerticalScrollIndicator={false}
-    >
+    <View style={styles.container}>
       <View style={styles.photo}>
         <Text style={styles.emoji}>
           📸
@@ -52,7 +47,7 @@ export default function DetalleFoto({ route }) {
           del lugar y capturá momentos espontáneos.
         </Text>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
