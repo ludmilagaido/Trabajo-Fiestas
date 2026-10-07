@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   Animated,
   Pressable,
-  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -118,11 +117,7 @@ export default function DetalleMusica({ route }) {
   };
 
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.content}
-      showsVerticalScrollIndicator={false}
-    >
+    <View style={styles.container}>
       <View style={styles.hero}>
         <View style={styles.topLabel}>
           <View
@@ -370,7 +365,7 @@ export default function DetalleMusica({ route }) {
           y empezá a entrar en modo fiesta.
         </Text>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
